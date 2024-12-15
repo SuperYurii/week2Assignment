@@ -1,13 +1,14 @@
 console.log("test");
 
 //TODO: I want to store my images
-const images = [
-  { src: "./images/1.jpg", alt: "a description of the image" },
-  { src: "./images/2.jpg", alt: "a description of the image" },
-  { src: "./images/3.jpg", alt: "a description of the image" },
-  { src: "./images/4.jpg", alt: "a description of the image" },
-  { src: "./images/5.jpg", alt: "a description of the image" },
-  { src: "./images/6.jpg", alt: "a description of the image" },
+const image = [
+  /*Надо ли чтоб имя массива было таким же как мы его потом призовём в аргумент функции?*/
+  { src: "./images/1.jpg", alt: "picture of beathlon" },
+  { src: "./images/2.jpg", alt: "picture of bobsleigh" },
+  { src: "images/3.webp", alt: "picture of olimpic games " },
+  { src: "./images/4.jpg", alt: "a picture of  skiing" },
+  { src: "./images/фигурное.jpg", alt: "a picture of Figure Skating" },
+  { src: "./images/хоккей.jpg", alt: "a picture of  ice hockey" },
 ];
 //!commit your work!
 
@@ -15,10 +16,31 @@ const images = [
 //STEP 1: Select the DOM element we are manipulating
 //I need to select both the thumbnail container and the large image container
 
+const thumbnailContainer = document.getElementById("thumbnail-container");
+const largeImageContainer = document.getElementById("large-image-container");
+
 //Since creating the thumbnail images takes more than one step, what is the best way to write a block of code? A function!
-//I want to resuse this function for all my images --> I need parameters
+//I want to reuse this function for all my images --> I need parameters
 
 function createThumbnails(imagesArray) {
+  /*1)создаю функцию,даю ей имя и ставлю imagesArray как аргумент*/
+  for (let i = 0; i < imagesArray.length; i++) {
+    /*с помощью цикла хочу спройись через все изображения в массиве. .length нужно для того, чтобы цикл for правильно перебрал все изображения, от первого до последнего.*/
+    const image = imagesArray[i];
+    const thumbnail = document.createElement("img");
+    thumbnail.src = image.src;
+    thumbnail.alt = image.alt;
+    thumbnail.width = 70;
+    thumbnail.height = 70;
+    thumbnail.className = "thumbnail";
+    thumbnail.addEventListener("click", function () {
+      //не совсем понимаю как это работает//
+      createLargeImagesHandler(image);
+    });
+    const thumbnailContainer = document.getElementById("thumbnail-container");
+    thumbnailContainer.appendChild(thumbnail);
+  }
+
   //I need to create more than one thumbnail --> I can use a loop
   //You can use different ways to loop thorugh your array: for loop / forEach()
   //Inside the loop, we have a few steps to do:
@@ -29,7 +51,7 @@ function createThumbnails(imagesArray) {
   //we need add an event to the image elements we are creating here
   //we need to append the images to the thumbnail container
 }
-createThumbnails(images);
+createThumbnails(image);
 
 //!commit your work!
 
